@@ -1,5 +1,5 @@
 namespace tp_final;
-
+using csvfiles; 
 static class Program
 {
     /// <summary>
@@ -10,7 +10,14 @@ static class Program
     {
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
+        _csv aux = new _csv();
+        aux.read_csv();
+        Console.WriteLine("Lei archivo.");
         ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
+       
+        Form1 aux2 = new Form1();
+        aux2.label1.Text=("Lei el archivo.");
+        Application.Run(aux2);
+        
     }    
 }
