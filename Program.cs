@@ -1,5 +1,7 @@
 namespace tp_final;
-using csvfiles; 
+using csvfiles;
+using static tp_final.Mochila;
+
 static class Program
 {
     /// <summary>
@@ -18,6 +20,12 @@ static class Program
         Form1 aux2 = new Form1();
         aux2.label1.Text=("Lei el archivo.");
         Application.Run(aux2);
-        
+        int[] val = new int[] { 60, 100, 120 };
+        int[] wt = new int[] { 10, 20, 30 };
+        int W = 50;
+        int n = val.Length;
+
+        Console.WriteLine(knapSack(W, wt, val, n));
+
     }    
 }
