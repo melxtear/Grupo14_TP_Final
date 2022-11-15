@@ -46,5 +46,12 @@ public class Pedido {
     public string? prioridad { get; set; }
     public string? barrio { get; set; }
     public DateTime fecha { get; set; }
+
+    public float Calcular_Volumen_Producto()
+    {
+            float result = 0;
+            result = ancho * largo * alto;
+            return result;
+    }
 }
 

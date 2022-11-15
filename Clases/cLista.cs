@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace tp_final
+namespace cLista
 {
-    class Vehiculo
+    public class cLista
     {
-        public int pesomax;
-        public float volumenmax;
+        public cLista() { }
     }
 }
+
