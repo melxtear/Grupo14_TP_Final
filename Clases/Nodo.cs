@@ -3,10 +3,10 @@
 namespace tp_final
 {
 
-	class cNodo
+	public class Nodo
 	{
 		public string Valor { get; set; }
-		public cNodo Siguiente { get;set; }
+		public Nodo Siguiente { get;set; }
 
 	}
 }

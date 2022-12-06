@@ -1,8 +1,12 @@
 ﻿using System;
 
-public class Class1
+namespace tp_final
 {
-	public Class1()
-	{
-	}
+    public class Grafo
+    {
+        public Grafo()
+        {}
+                                                                 //Número de Aristas
+    }
 }
+

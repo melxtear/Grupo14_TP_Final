@@ -18,6 +18,7 @@ namespace tp_final
         float alturamax { get; set; }
         float densidadmax { get; set; }
 
+        public List<Pedido> pedidos_a_llevar { get; set; };
         void calcular_densidad() { 
             float resultado;
             resultado = pesomax / volumenmax;

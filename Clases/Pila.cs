@@ -2,10 +2,9 @@
 
 namespace tp_final
 {
-    class cPila
-    {
-
-        public cNodo _tope;
+    public class cPila
+    { 
+        public Nodo _tope;
 
         public cNodo Tope()
         {

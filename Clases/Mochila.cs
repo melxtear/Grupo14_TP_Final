@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace tp_final
 {
-    public class cMochila
+    public class Mochila
     {
         //habria que hacer una clase de mochila y otra del problema del viajero??
         //ver si lo que tiene que retornar es pedido o sea lista de estos o una lista en si (clase lista?)
@@ -71,84 +71,77 @@ namespace tp_final
             }
         }
     }
-        /*public int KnapSack(int W, int[] wt, int[] val, int n)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Practica_TP
+    {
+        public class practica
         {
-            int i, w;
-            int[,] K = new int[n + 1, W + 1];
-
-            // Build table K[][] in bottom
-            // up manner
-            for (i = 0; i <= n; i++)
+            public class Item
             {
-                for (w = 0; w <= W; w++)
-                {
-
-                    if (i == 0 || w == 0)
-                        K[i, w] = 0;
-
-                    else if (wt[i - 1] <= w)
-                        K[i, w] = Math.Max(val[i - 1] + K[i - 1, w - wt[i - 1]], K[i - 1, w]);
-                    else
-                        K[i, w] = K[i - 1, w];
-                }
+                public int Weight { get; set; }
+                public int Value { get; set; }
             }
-
-            return K[n, W];
-        }*/
-        public void cargarPedidos(List<Pedido> pedidos, cVehiculo vehiculo)
-        {
-            int i, j;
-            float sumVol = 0;
-            int nuevaCantPedidos = 0;
-            int sumPeso = 0;
-
-            // Segundo algoritmo: vorazmente checkeo cuantos pedidos pueden entrar (segun el volumen)
-
-            for (i = 0; i < pedidos.Count; i++)
+            public static List<Item> KnapSack(Item[] items, int capacity)
             {
-                if (sumVol + pedidos[i].volumen < vehiculo.volumenMax && pedidos[i].cargado == false)
+                int[,] matrix = new int[items.Length + 1, capacity + 1];
+                List<Item>[,] matrix2 = new List<Item>[items.Length + 1, capacity + 1];
+                for (int i = 0; i < items.Length + 1; i++)
                 {
-                    sumVol += pedidos[i].volumen;
-                    nuevaCantPedidos++;
+                    for (int j = 0; j < capacity + 1; j++)
+                        matrix2[i, j] = new List<Item>();
                 }
-            }
 
-            // Armo la matriz de soluciones en base a mi sub-lista de pedidos (acortada por el tope de volumen)
-            int[,] solucion = new int[nuevaCantPedidos + 1, vehiculo.pesoMax + 1];
-
-
-            for (i = 0; i <= nuevaCantPedidos; i++)
-            {
-                for (j = 0; j <= vehiculo.pesoMax; j++)
+                for (int itemIndex = 0; itemIndex <= items.Length; itemIndex++)
                 {
-                    if (i == 0 || j == 0)
+                    // This adjusts the itemIndex to be 1 based instead of 0 based
+                    // and in this case 0 is the initial state before an item is
+                    // considered for the knapsack.
+                    var currentItem = itemIndex == 0 ? null : items[itemIndex - 1];
+                    for (int currentCapacity = 0; currentCapacity <= capacity; currentCapacity++)
                     {
-                        solucion[i, j] = 0;
-                    }
-                    else if (pedidos[i - 1].peso <= j)
-                    {
-                        solucion[i, j] = Math.Max(pedidos[i - 1].prioridad + solucion[i - 1, j - pedidos[i - 1].peso],
-                                                  solucion[i - 1, j]);
-                        // **** SISTEMA NACIONAL DE VERIFICACION DE PEDIDOS AL VEHICULO ****
-                        if (pedidos[i - 1].prioridad + solucion[i - 1, j - pedidos[i - 1].peso] > solucion[i - 1, j] // hubo modificaciones en la matriz prog. dinamica?
-                            && pedidos[i - 1].cargado == false // se cargo el pedido anteriormente?
-                            && sumPeso + pedidos[i - 1].peso < vehiculo.pesoMax) // se excede el peso del vehiculo?
+                        // Set the first row and column of the matrix to all zeros
+                        // This is the state before any items are added and when the
+                        // potential capacity is zero the value would also be zero.
+                        if (currentItem == null || currentCapacity == 0)
                         {
-                            vehiculo.pedidos.Add(pedidos[i - 1]);
-                            pedidos[i - 1].cargado = true;
-                            sumPeso += pedidos[i - 1].peso;
+                            matrix[itemIndex, currentCapacity] = 0;
                         }
-                    }
-                    else
-                    {
-                        solucion[i, j] = solucion[i - 1, j];
-                    }
-                }
-            }
-            vehiculo.pesoActual = sumPeso;
-            vehiculo.volumenActual = sumVol;
-        }
-    }
+                        // If the current items weight is less than the current capacity
+                        // then we should see if adding this item to the knapsack 
+                        // results in a greater value than what was determined for
+                        // the previous item at this potential capacity.
+                        else if (currentItem.Weight <= currentCapacity)
+                        {
+                            /*public int KnapSack(int W, int[] wt, int[] val, int n)
+                            {
+                                int i, w;
+                                int[,] K = new int[n + 1, W + 1];
+
+                                // Build table K[][] in bottom
+                                // up manner
+                                for (i = 0; i <= n; i++)
+                                {
+                                    for (w = 0; w <= W; w++)
+                                    {
+
+                                        if (i == 0 || w == 0)
+                                            K[i, w] = 0;
+
+                                        else if (wt[i - 1] <= w)
+                                            K[i, w] = Math.Max(val[i - 1] + K[i - 1, w - wt[i - 1]], K[i - 1, w]);
+                                        else
+                                            K[i, w] = K[i - 1, w];
+                                    }
+                                }
+
+                                return K[n, W];
+                            }*/
+                        }
 }
 }
  
